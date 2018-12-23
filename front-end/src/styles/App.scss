@@ -1,0 +1,90 @@
+body{
+    background: #eaebef;
+    color: #212121;
+    margin: 0;
+    padding: 0;
+    font-family: "Courier New", Courier, monospace;
+    button {
+        cursor: pointer;
+    }
+    .App {
+        text-align: center;
+    }
+    .nav-bar {
+        display: flex;
+        justify-content: flex-end;
+        padding: 0 10px;
+        .nav-item {
+            margin-left: 20px;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    } 
+    .center {
+        display: flex;
+        justify-content: center;
+    }
+    .white-card{
+        background-color: #fff;
+        border-radius: 6px;
+        overflow: hidden;
+        box-shadow: 0 0 6px 0 rgba(0,0,0,0.32);
+        padding: 15px;
+        margin-top: 20px;
+        position: relative;
+        min-width: 400px;
+        &:first-child{
+            margin-top: 0;
+        }
+    }
+    .cursor-pointer {
+        cursor: pointer;
+    }
+    .field-wrapper {
+        .field-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+    .submit-btn-wrapper {
+        margin-top: 10px;
+        .submit-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 200px;
+            background: #5d6c74;
+            color: #fff;
+            border-radius: 20px;
+            height: 40px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,.3);
+            margin: auto;
+            font-size: 16px;
+            border: none;
+            outline: 0;
+            &:hover {
+                background: #425b68;
+            }
+        }
+    }
+    .user-profile-wrapper{
+        background-size: contain;
+        border-radius: 50%;
+        width: 44px;
+        margin: 0 8px 0 0;
+        padding: 2px;
+        .user-profile-icon{
+            border: 2px solid #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50px;
+            background-size: 100% 100%;
+        }
+    }
+}
