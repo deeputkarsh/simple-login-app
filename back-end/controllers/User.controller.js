@@ -40,7 +40,9 @@ module.exports = {
   },
   authenticateUser: async (data) => {
     const user = await User.findOne({ mobile: data.mobile })
-    if (!user.validPassword(data.password)) {
+    if (!user) {
+      throw new Error("User doesn't exist")
+    } else if (!user.validPassword(data.password)) {
       throw new Error('Invalid Password')
     } else {
       return {
