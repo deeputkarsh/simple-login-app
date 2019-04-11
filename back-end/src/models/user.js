@@ -1,8 +1,7 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
-const bcrypt = require('bcrypt-nodejs')
+import mongoose, { Schema } from 'mongoose'
+import bcrypt from 'bcrypt-nodejs'
 
-const User = new Schema({
+const schemaDef = new Schema({
   email: String,
   password: {
     type: String,
@@ -17,17 +16,15 @@ const User = new Schema({
     type: Number,
     unique: true
   }
-}, {
-  collection: 'Users'
 })
 // hash the password
-User.methods.generateHash = function (password) {
+schemaDef.methods.generateHash = function (password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)
 }
 
 // checking if password is valid
-User.methods.validPassword = function (password) {
+schemaDef.methods.validPassword = function (password) {
   return bcrypt.compareSync(password, this.password)
 }
 
-module.exports = mongoose.model('User', User)
+export const User = mongoose.model('User', schemaDef)

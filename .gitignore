@@ -1,7 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+/front-end/node_modules
+/back-end/node_modules
 
 # testing
 /coverage
@@ -10,6 +11,9 @@
 /build
 
 # misc
+/front-end/package-lock.json
+/back-end/package-lock.json
+.env
 .DS_Store
 .env.local
 .env.development.local
