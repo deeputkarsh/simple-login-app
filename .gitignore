@@ -8,7 +8,8 @@
 /coverage
 
 # production
-/build
+/front-end/build
+/back-end/build
 
 # misc
 /front-end/package-lock.json
