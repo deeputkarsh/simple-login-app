@@ -1,28 +1,19 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const config = require('./config')
-const cors = require('cors')
-const mongoose = require('mongoose')
-const slaRoute = require('./routes/sla.route')
+require('dotenv').config()
 
-const app = express()
-app.use(cors({
-  origin: config.frontEndUrl,
-  optionsSuccessStatus: 200
-}))
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
+/*
+* Code to check if required enviroment variables are set to run the application
+*/
+let applicationEnvVars = [ 'APP_ENVIROMENT', 'PORT', 'APP_VERSION' ]
+let mongoBasicEnvVars = [ 'MONGO_HOSTS', 'MONGO_DBNAME', 'MONGO_AUTHSOURCE' ]
 
-const mongoDB = process.env.MONGODB_URI || config.mongoUrl
-mongoose.connect(mongoDB, {
-  useCreateIndex: true,
-  useNewUrlParser: true
+applicationEnvVars = [ ...applicationEnvVars, ...mongoBasicEnvVars ]
+
+let unusedEnvVars = applicationEnvVars.filter((i) => !process.env[i])
+
+if (unusedEnvVars.length) throw new Error('Required ENV variables are not set: [' + unusedEnvVars.join(', ') + ']')
+
+const { initApp } = require('./src')
+
+initApp().then(app => {
+  app.listen(process.env.PORT, () => console.log(`Simple Login App running on port ${process.env.PORT}!`))
 })
-mongoose.Promise = global.Promise
-const db = mongoose.connection
-db.on('error', console.error.bind(console, 'MongoDB connection error:'))
-
-app.get('/', (req, res) => res.redirect(config.frontEndUrl))
-app.use('/sla', slaRoute)
-
-app.listen(config.port, () => console.log(`Simple Login App running on port ${config.port}!`))
