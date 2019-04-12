@@ -3,10 +3,10 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 RUN  npm i
 COPY . ./
-RUN npm run build
-# VOLUME [ "/build" ]
+# RUN npm run build
 
-FROM nginx:alpine
-COPY --from=build-deps /usr/src/app/build /usr/share/nginx/html
-EXPOSE 8080
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 3015
+CMD [ "npm", "start" ]
+# FROM nginx:alpine
+# COPY --from=build-deps /usr/src/app/build /srv/www/static
+# EXPOSE 8080

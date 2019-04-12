@@ -4,17 +4,25 @@ services:
     container_name: front-end-container
     image: front-end-image
     build: ./front-end
+    # environment:
+    #   - API_URL=back_end/sla
+    # depends_on:
+    #   - back_end
     ports:
-      - "8080:8080"
-  # dbservice:
-  #   container_name: mongodbservicecontainer
-  #   image: mongo
-  #   ports:
-  #     - "27017:27017"
+      - "3015:3015"
+  dbservice:
+    container_name: mongodbservicecontainer
+    image: mongo
+    ports:
+      - "27017:27017"
   back_end:
     container_name: back-end-container
     image: back-end-image
     build: ./back-end
+    environment:
+      - MONGO_HOSTS=dbservice
+    depends_on: 
+      - dbservice
     ports:
       - "3000:3000"
   
